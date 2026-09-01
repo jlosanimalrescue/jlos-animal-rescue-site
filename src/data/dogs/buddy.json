@@ -1,12 +1,12 @@
 {
+  "size": "Large",
+  "sex": "Male",
   "name": "Buddy",
   "slug": "buddy",
-  "breed": "Mixed Breed",
-  "age": "3 years",
-  "sex": "Male",
-  "size": "Large",
-  "status": "Available",
   "featured": true,
+  "status": "Available",
+  "breed": "Mixed Breed",
   "image": "",
-  "description": "Buddy is looking for his forever home."
+  "description": "Buddy is looking for his forever home. He is very loveable and wants all the belly rubs",
+  "age": "3 years"
 }
