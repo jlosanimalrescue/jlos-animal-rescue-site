@@ -11,6 +11,7 @@ public_folder: "/images/dogs"
 collections:
   - name: "dogs"
     label: "Dogs"
+    label_singular: "Dog"
     folder: "src/data/dogs"
     create: true
     extension: "json"
@@ -19,13 +20,14 @@ collections:
     slug: "{{slug}}"
 
     fields:
-      - label: "Name"
+      - label: "Dog's Name"
         name: "name"
         widget: "string"
 
-      - label: "Slug"
+      - label: "URL Name"
         name: "slug"
         widget: "string"
+        hint: "Lowercase with dashes. Example: sweet-caroline"
 
       - label: "Breed"
         name: "breed"
@@ -34,13 +36,14 @@ collections:
       - label: "Age"
         name: "age"
         widget: "string"
+        hint: "Example: 2 years or 8 months"
 
       - label: "Sex"
         name: "sex"
         widget: "select"
         options:
-          - "Male"
           - "Female"
+          - "Male"
 
       - label: "Size"
         name: "size"
@@ -49,25 +52,30 @@ collections:
           - "Small"
           - "Medium"
           - "Large"
+          - "Extra Large"
 
-      - label: "Status"
+      - label: "Adoption Status"
         name: "status"
         widget: "select"
+        default: "Available"
         options:
           - "Available"
           - "Pending"
           - "Adopted"
 
-      - label: "Featured on Homepage"
+      - label: "Feature on Homepage"
         name: "featured"
         widget: "boolean"
         default: false
+        hint: "Turn this on to show this dog in the featured section on the homepage."
 
-      - label: "Photo"
+      - label: "Dog Photo"
         name: "image"
         widget: "image"
-        required: false
+        required: true
+        hint: "Upload the main photo you want visitors to see."
 
-      - label: "Description"
+      - label: "About This Dog"
         name: "description"
         widget: "text"
+        hint: "Tell potential adopters about this dog's personality, story, and ideal home."
