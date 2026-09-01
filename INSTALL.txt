@@ -1,0 +1,27 @@
+CLEAN INSTALL
+
+1) Keep your fresh Astro project running.
+2) Download this ZIP and unzip it.
+3) In the unzipped folder, copy ONLY:
+   - src
+   - public
+   - netlify.toml
+4) Paste those into your fresh jlos-animal-rescue folder.
+5) Replace the existing src folder when macOS asks.
+6) Merge the public folder when macOS asks.
+7) Make sure public/images/Hero-dogs.jpg exists.
+8) Put your dog scribble image at public/images/dog-scribble.png.
+9) Leave Terminal running with npm run dev.
+10) Refresh http://localhost:4321
+
+The real main logo is already included as:
+public/images/J-lo logo.png
+
+The favicon SVG is already included as:
+public/favicon.svg
+
+Dog photos can later be replaced in:
+public/images/dogs/
+
+Dog names/details live in:
+src/data/dogs.json

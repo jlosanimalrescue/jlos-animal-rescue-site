@@ -1,0 +1,1 @@
+Copy your existing Hero-dogs.jpg into public/images/Hero-dogs.jpg

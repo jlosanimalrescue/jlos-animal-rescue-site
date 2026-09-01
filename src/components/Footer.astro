@@ -1,0 +1,33 @@
+<footer class="site-footer">
+  <div class="scribble-wrap" aria-hidden="true">
+    <img src="/images/dog-scribble.png" alt="" onerror="this.style.display='none'" />
+  </div>
+  <div class="footer-main">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="/images/J-lo logo.png" alt="J-Lo's Animal Rescue & Sanctuary" />
+        <p>From neglected to nourished. From alone to adored.</p>
+      </div>
+      <div class="footer-links">
+        <div><h3>Explore</h3><a href="/adopt">Adopt</a><a href="/mission">Our Mission</a><a href="/get-involved">Get Involved</a></div>
+        <div><h3>Help</h3><a href="/donate">Donate</a><a href="/faq">FAQs</a><a href="/contact">Contact</a></div>
+        <div><h3>Location</h3><p>Albany, Georgia</p><p>Visits by appointment.</p></div>
+      </div>
+    </div>
+    <div class="footer-bottom">© {new Date().getFullYear()} J-Lo's Animal Rescue & Sanctuary.</div>
+  </div>
+</footer>
+<style>
+.site-footer{position:relative;padding-top:145px;background:#faf7f2}
+.scribble-wrap{position:absolute;left:max(20px,calc((100vw - 1200px)/2));bottom:250px;width:190px;pointer-events:none}
+.scribble-wrap img{width:100%}
+.footer-main{background:#191414;color:#fff}
+.footer-inner{width:min(1200px,calc(100% - 48px));margin:auto;padding:64px 0 48px;display:grid;grid-template-columns:1.2fr 2fr;gap:70px}
+.footer-brand img{width:220px;filter:brightness(0) invert(1)}
+.footer-brand p{max-width:360px;color:rgba(255,255,255,.7);line-height:1.6}
+.footer-links{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.footer-links h3{margin:0 0 16px;font-size:15px;text-transform:uppercase;letter-spacing:1px}
+.footer-links a,.footer-links p{display:block;margin:0 0 10px;color:rgba(255,255,255,.7);text-decoration:none;line-height:1.5}
+.footer-bottom{width:min(1200px,calc(100% - 48px));margin:auto;padding:20px 0 30px;border-top:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5);font-size:13px}
+@media(max-width:760px){.site-footer{padding-top:115px}.scribble-wrap{width:130px;bottom:350px}.footer-inner{grid-template-columns:1fr;gap:36px}.footer-links{grid-template-columns:1fr 1fr}}
+</style>

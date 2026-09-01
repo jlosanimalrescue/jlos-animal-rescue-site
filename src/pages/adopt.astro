@@ -1,0 +1,10 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import DogCard from '../components/DogCard.astro';
+import dogs from '../data/dogs.json';
+---
+<BaseLayout title="Adopt | J-Lo's Animal Rescue">
+<section class="page-hero"><div class="container"><p class="eyebrow">Available Dogs</p><h1 class="section-title">Meet your new best friend.</h1><p class="section-copy">Browse the dogs currently looking for homes. When someone catches your eye, send an inquiry and we'll help determine whether the match feels right.</p></div></section>
+<section class="content-section"><div class="container"><div class="dog-grid">{dogs.filter(d=>d.status==='Available').map((dog)=><DogCard dog={dog}/>)}</div></div></section>
+</BaseLayout>
+<style>.dog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}@media(max-width:950px){.dog-grid{grid-template-columns:1fr 1fr}}@media(max-width:650px){.dog-grid{grid-template-columns:1fr}}</style>

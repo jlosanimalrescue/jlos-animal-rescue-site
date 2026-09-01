@@ -1,0 +1,41 @@
+[
+  {
+    "name": "Daisy",
+    "slug": "daisy",
+    "breed": "Mixed Breed",
+    "age": "2 years",
+    "sex": "Female",
+    "size": "Medium",
+    "status": "Available",
+    "featured": true,
+    "image": "/images/dogs/placeholder.svg",
+    "summary": "Sweet, affectionate, and ready for a family of her own.",
+    "description": "Replace this with Daisy's real story when you're ready."
+  },
+  {
+    "name": "Buddy",
+    "slug": "buddy",
+    "breed": "Mixed Breed",
+    "age": "3 years",
+    "sex": "Male",
+    "size": "Large",
+    "status": "Available",
+    "featured": false,
+    "image": "/images/dogs/placeholder.svg",
+    "summary": "Friendly, goofy, and always ready to be part of the action.",
+    "description": "Replace this with Buddy's real story when you're ready."
+  },
+  {
+    "name": "Rosie",
+    "slug": "rosie",
+    "breed": "Mixed Breed",
+    "age": "1 year",
+    "sex": "Female",
+    "size": "Medium",
+    "status": "Available",
+    "featured": false,
+    "image": "/images/dogs/placeholder.svg",
+    "summary": "Gentle, curious, and looking for her forever home.",
+    "description": "Replace this with Rosie's real story when you're ready."
+  }
+]
