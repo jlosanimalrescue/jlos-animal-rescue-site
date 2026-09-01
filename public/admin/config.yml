@@ -1,6 +1,6 @@
 backend:
   name: github
-repo: jlosanimalrescue/jlos-animal-rescue-site
+  repo: "jlosanimalrescue/jlos-animal-rescue-site"
   branch: main
 
 local_backend: true
