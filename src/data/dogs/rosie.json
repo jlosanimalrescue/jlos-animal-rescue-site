@@ -1,0 +1,12 @@
+{
+  "name": "Rosie",
+  "slug": "rosie",
+  "breed": "Mixed Breed",
+  "age": "1 year",
+  "sex": "Female",
+  "size": "Medium",
+  "status": "Available",
+  "featured": true,
+  "image": "",
+  "description": "Rosie is looking for her forever home."
+}

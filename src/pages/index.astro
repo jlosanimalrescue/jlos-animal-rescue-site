@@ -1,65 +1,709 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import DogCard from '../components/DogCard.astro';
-import dogs from '../data/dogs.json';
-const featuredDogs = dogs.slice(0,3);
+const dogFiles = import.meta.glob('../data/dogs/*.json', { eager: true });
+
+const dogs = Object.values(dogFiles).map((file: any) => file.default);
+
+const featuredDogs = dogs
+  .filter((dog) => dog.featured && dog.status === 'Available')
+  .slice(0, 3);
 ---
-<BaseLayout>
-  <section class="hero">
-    <div class="hero-overlay"></div>
-    <div class="hero-inner">
-      <div class="hero-copy">
-        <h1>From Neglected<br/>to Nourished.<br/>From Alone<br/>to Adored. <span>♥</span></h1>
-        <p class="hero-sub">A safe haven. A second chance.<br/>A forever home.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="/adopt">Meet the Dogs</a>
-          <a class="btn btn-outline light" href="/donate">Help Us Save More</a>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <section class="dogs-home">
-    <div class="container">
-      <div class="center-heading">
-        <p class="eyebrow">Find your new best friend</p>
-        <h2 class="section-title">Dogs Looking for Love</h2>
-        <p class="section-copy">Every dog here is waiting for the right family. Maybe that's you.</p>
-      </div>
-      <div class="dogs-grid">{featuredDogs.map((dog)=><DogCard dog={dog}/>)}</div>
-      <div class="center-action"><a class="btn btn-primary" href="/adopt">View All Dogs</a></div>
-    </div>
-  </section>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<title>J-Lo's Animal Rescue & Sanctuary</title>
+	</head>
 
-  <section class="mission-home">
-    <div class="container mission-grid">
-      <div><p class="eyebrow">Our Mission</p><h2 class="section-title">A life-saving dream made real.</h2></div>
-      <div class="mission-copy">
-        <p>Founded by Jessica Lopez, a wife and mother of three, J-Lo Animal Rescue is a heartfelt life-long dream of Jessica’s that has blossomed into a life-saving reality in Albany, Ga.</p>
-        <p>What started as a mission to save several emaciated dogs discovered in a local backyard has grown into a thriving non-profit sanctuary that now provides a safe haven for over 60 dogs at a time.</p>
-        <p>We are dedicated to transforming lives through compassion and faith, ensuring that every animal in our care finds the love and dignity they deserve.</p>
-        <a class="text-link" href="/mission">Read Our Story →</a>
-      </div>
-    </div>
-  </section>
+	<body>
+		<header>
+			<div class="logo-wrap">
+				<img src="/images/J-lo logo.png" alt="J-Lo's Animal Rescue & Sanctuary" />
+			</div>
 
-  <section class="give-home">
-    <div class="container give-card">
-      <div><p class="eyebrow inverse">Join our rescue pack</p><h2>Help us save the next one.</h2><p>Food, veterinary care, shelter, transportation, and daily care all add up. Your support gives rescued dogs the chance to heal and find home.</p></div>
-      <a class="btn btn-light" href="/donate">Donate Today</a>
-    </div>
-  </section>
-</BaseLayout>
+			<nav>
+				<a href="/">Home</a>
+				<a href="#dogs">Adopt</a>
+				<a href="#mission">Our Mission</a>
+				<a href="#involved">Get Involved</a>
+				<a href="#faq">FAQs</a>
+				<a href="#contact">Contact</a>
+			</nav>
+
+			<a class="donate" href="#donate">♡ Donate</a>
+		</header>
+
+		<main>
+			<section class="hero">
+				<div class="overlay"></div>
+
+				<div class="hero-content">
+					<h1>
+						From Neglected<br />
+						to Nourished.<br />
+						From Alone<br />
+						to Adored. <span>♥</span>
+					</h1>
+
+					<p>
+						A safe haven. A second chance.<br />
+						A forever home.
+					</p>
+
+					<div class="hero-buttons">
+						<a class="primary-button" href="#dogs">Meet the Dogs</a>
+						<a class="secondary-button" href="#donate">Help Us Save More</a>
+					</div>
+				</div>
+			</section>
+
+			<section class="dogs-section" id="dogs">
+				<div class="section-heading">
+					<p class="eyebrow">Find Your New Best Friend</p>
+					<h2>Dogs Looking for Love</h2>
+					<p>Every dog here is waiting for the right family. Maybe that's you.</p>
+				</div>
+
+				<div class="dog-grid">
+	{featuredDogs.map((dog) => (
+		<article class="dog-card">
+			<div class="dog-photo">
+				{dog.image ? (
+					<img src={dog.image} alt={dog.name} />
+				) : (
+					<span>Replace Dog Photo</span>
+				)}
+			</div>
+
+			<div class="dog-info">
+				<h3>{dog.name}</h3>
+				<p>{dog.breed}</p>
+
+				<div class="tags">
+					<span>{dog.age}</span>
+					<span>{dog.sex}</span>
+					<span>{dog.size}</span>
+				</div>
+
+				<a href="#contact">Meet {dog.name} →</a>
+			</div>
+		</article>
+	))}
+</div>
+			</section>
+
+			<section class="mission-section" id="mission">
+				<div class="mission-inner">
+					<div>
+						<p class="eyebrow">Our Mission</p>
+						<h2>A life-saving dream made real.</h2>
+					</div>
+
+					<div class="mission-copy">
+						<p>
+							Founded by Jessica Lopez, a wife and mother of three, J-Lo Animal Rescue
+							is a heartfelt life-long dream of Jessica’s that has blossomed into a
+							life-saving reality in Albany, Ga.
+						</p>
+
+						<p>
+							What started as a mission to save several emaciated dogs discovered in
+							a local backyard has grown into a thriving non-profit sanctuary that now
+							provides a safe haven for over 60 dogs at a time.
+						</p>
+
+						<p>
+							We are dedicated to transforming lives through compassion and faith,
+							ensuring that every animal in our care finds the love and dignity they deserve.
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section class="involved-section" id="involved">
+				<div class="section-heading">
+					<p class="eyebrow">Get Involved</p>
+					<h2>There’s more than one way to help.</h2>
+				</div>
+
+				<div class="involved-grid">
+					<div>
+						<h3>Adopt</h3>
+						<p>Give a rescue dog the forever home they’ve been waiting for.</p>
+					</div>
+
+					<div>
+						<h3>Donate</h3>
+						<p>Help cover food, veterinary care, supplies, transportation, and daily needs.</p>
+					</div>
+
+					<div>
+						<h3>Volunteer</h3>
+						<p>Give your time and skills to help support the sanctuary and the dogs.</p>
+					</div>
+				</div>
+			</section>
+
+			<section class="donate-section" id="donate">
+				<div>
+					<p class="eyebrow light-eyebrow">Join Our Rescue Pack</p>
+					<h2>Help us save the next one.</h2>
+					<p>
+						Your support gives rescued dogs food, medical care, shelter, transportation,
+						and the chance to heal.
+					</p>
+				</div>
+
+				<a href="#" class="white-button">Donate Today</a>
+			</section>
+
+			<section class="faq-section" id="faq">
+				<div class="section-heading">
+					<p class="eyebrow">FAQs</p>
+					<h2>Before You Adopt</h2>
+				</div>
+
+				<div class="faq-list">
+					<details>
+						<summary>How do I adopt a dog?</summary>
+						<p>
+							Browse available dogs, send an inquiry, complete the application,
+							and work with us through the matchmaking process.
+						</p>
+					</details>
+
+					<details>
+						<summary>Can I meet a dog first?</summary>
+						<p>
+							Yes. Meetings are coordinated directly with the rescue as part of the adoption process.
+						</p>
+					</details>
+
+					<details>
+						<summary>Why is a home walkthrough required?</summary>
+						<p>
+							It helps us make sure the environment is appropriate and safe for the dog.
+						</p>
+					</details>
+				</div>
+			</section>
+
+			<section class="contact-section" id="contact">
+				<div class="section-heading">
+					<p class="eyebrow">Contact</p>
+					<h2>Tell us how we can help.</h2>
+				</div>
+
+				<form>
+					<input type="text" placeholder="Your name" />
+					<input type="email" placeholder="Email address" />
+					<input type="text" placeholder="Dog you're interested in" />
+					<textarea placeholder="Message"></textarea>
+					<button type="submit">Send Message</button>
+				</form>
+			</section>
+
+			<section class="scribble-section">
+				<img src="/images/dog-scribble.png" alt="" />
+			</section>
+		</main>
+
+		<footer>
+			<div class="footer-logo">
+				<img src="/images/J-lo logo.png" alt="J-Lo's Animal Rescue & Sanctuary" />
+			</div>
+
+			<div>
+				<p>Albany, Georgia</p>
+				<p>From Neglected to Nourished. From Alone to Adored.</p>
+			</div>
+
+			<div>
+				<a href="#dogs">Adopt</a>
+				<a href="#mission">Our Mission</a>
+				<a href="#involved">Get Involved</a>
+				<a href="#contact">Contact</a>
+			</div>
+		</footer>
+	</body>
+</html>
+
 <style>
-.hero{position:relative;min-height:650px;display:flex;align-items:center;background-image:url('/images/Hero-dogs.jpg');background-size:cover;background-position:center;background-color:#b9aa99}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.78),rgba(0,0,0,.52) 42%,rgba(0,0,0,.12) 76%,rgba(0,0,0,.04))}
-.hero-inner{position:relative;z-index:1;width:min(1200px,calc(100% - 48px));margin:auto;padding:76px 0}
-.hero-copy{max-width:650px;color:#fff}
-h1{margin:0;font-size:clamp(52px,6vw,86px);line-height:.98;letter-spacing:-3.5px}h1 span{color:#d92b33}
-.hero-sub{margin:28px 0 0;font-size:21px;line-height:1.5}.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}.light{color:#fff}
-.dogs-home{padding:100px 0}.center-heading{max-width:760px;margin:0 auto 50px;text-align:center}.dogs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}.center-action{margin-top:38px;text-align:center}
-.mission-home{padding:100px 0;background:#f3ece4}.mission-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px}.mission-copy{color:#4f4742;font-size:18px;line-height:1.75}.mission-copy p:first-child{margin-top:0}.text-link{display:inline-block;margin-top:12px;color:#c9252d;text-decoration:none;font-weight:800;text-transform:uppercase;font-size:13px;letter-spacing:.8px}
-.give-home{padding:90px 0}.give-card{padding:54px;display:flex;align-items:center;justify-content:space-between;gap:40px;background:#c9252d;color:#fff;border-radius:28px}.give-card>div{max-width:760px}.give-card h2{margin:0;font-size:clamp(38px,4vw,58px);letter-spacing:-2px}.give-card p:not(.eyebrow){margin:18px 0 0;color:rgba(255,255,255,.85);font-size:18px;line-height:1.6}.inverse{color:#fff;opacity:.75}.btn-light{flex-shrink:0;background:#fff;color:#c9252d}
-@media(max-width:900px){.dogs-grid{grid-template-columns:1fr 1fr}.mission-grid{grid-template-columns:1fr;gap:32px}.give-card{align-items:flex-start;flex-direction:column}}
-@media(max-width:650px){.hero{min-height:590px;background-position:58% center}.hero-inner{width:min(1200px,calc(100% - 34px));padding:60px 0}h1{font-size:50px;letter-spacing:-2.5px}.dogs-grid{grid-template-columns:1fr}.dogs-home,.mission-home{padding:72px 0}.give-home{padding:70px 0}.give-card{padding:34px 26px}}
+	:global(*) {
+		box-sizing: border-box;
+	}
+
+	:global(html) {
+		scroll-behavior: smooth;
+	}
+
+	:global(body) {
+		margin: 0;
+		font-family: Arial, Helvetica, sans-serif;
+		background: #faf7f2;
+		color: #191414;
+	}
+
+	header {
+		min-height: 96px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 10px 5%;
+		background: #faf7f2;
+		gap: 30px;
+	}
+
+	.logo-wrap img {
+		width: auto;
+		height: 72px;
+		max-width: 270px;
+		object-fit: contain;
+	}
+
+	nav {
+		display: flex;
+		align-items: center;
+		gap: 30px;
+	}
+
+	nav a {
+		color: #191414;
+		text-decoration: none;
+		font-size: 14px;
+		font-weight: 700;
+	}
+
+	.donate {
+		background: #c9252d;
+		color: white;
+		text-decoration: none;
+		text-transform: uppercase;
+		font-weight: 800;
+		padding: 15px 24px;
+		border-radius: 999px;
+		white-space: nowrap;
+	}
+
+	.hero {
+		position: relative;
+		min-height: 650px;
+		display: flex;
+		align-items: center;
+		padding: 70px 6%;
+		background-image: url('/images/Hero-dogs.jpg');
+		background-size: cover;
+		background-position: center;
+	}
+
+	.overlay {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(
+			90deg,
+			rgba(0,0,0,.78) 0%,
+			rgba(0,0,0,.50) 45%,
+			rgba(0,0,0,.08) 100%
+		);
+	}
+
+	.hero-content {
+		position: relative;
+		z-index: 1;
+		max-width: 650px;
+		color: white;
+	}
+
+	h1 {
+		margin: 0;
+		font-size: clamp(52px, 6vw, 84px);
+		line-height: .98;
+		letter-spacing: -3px;
+	}
+
+	h1 span {
+		color: #d72a31;
+	}
+
+	.hero-content > p {
+		font-size: 21px;
+		line-height: 1.5;
+		margin: 28px 0;
+	}
+
+	.hero-buttons {
+		display: flex;
+		gap: 14px;
+		flex-wrap: wrap;
+	}
+
+	.primary-button,
+	.secondary-button,
+	.white-button {
+		display: inline-block;
+		padding: 15px 25px;
+		border-radius: 999px;
+		text-decoration: none;
+		text-transform: uppercase;
+		font-size: 13px;
+		font-weight: 800;
+	}
+
+	.primary-button {
+		background: #c9252d;
+		color: white;
+	}
+
+	.secondary-button {
+		border: 2px solid white;
+		color: white;
+	}
+
+	.dogs-section,
+	.involved-section,
+	.faq-section,
+	.contact-section {
+		padding: 100px 6%;
+	}
+
+	.section-heading {
+		max-width: 760px;
+		margin: 0 auto 50px;
+		text-align: center;
+	}
+
+	.eyebrow {
+		margin: 0 0 12px;
+		color: #c9252d;
+		font-size: 12px;
+		font-weight: 800;
+		letter-spacing: 2px;
+		text-transform: uppercase;
+	}
+
+	.section-heading h2,
+	.mission-section h2,
+	.donate-section h2 {
+		margin: 0;
+		font-size: clamp(40px, 5vw, 64px);
+		line-height: 1;
+		letter-spacing: -2px;
+	}
+
+	.section-heading > p:last-child {
+		font-size: 18px;
+		color: #665d57;
+		line-height: 1.6;
+	}
+
+	.dog-grid {
+		max-width: 1200px;
+		margin: auto;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 24px;
+	}
+
+	.dog-card {
+		overflow: hidden;
+		background: white;
+		border-radius: 24px;
+		border: 1px solid rgba(25,20,20,.08);
+		box-shadow: 0 18px 45px rgba(30,20,18,.07);
+	}
+
+	.dog-photo {
+		aspect-ratio: 4 / 3;
+		display: grid;
+		place-items: center;
+		background: #e9e2da;
+		color: #81766e;
+		font-weight: 700;
+	}
+
+	.dog-info {
+		padding: 22px;
+	}
+
+	.dog-info h3 {
+		margin: 0;
+		font-size: 30px;
+	}
+
+	.dog-info > p {
+		margin: 5px 0 0;
+		color: #665d57;
+	}
+
+	.tags {
+		display: flex;
+		gap: 8px;
+		flex-wrap: wrap;
+		margin: 18px 0;
+	}
+
+	.tags span {
+		background: #f3ece4;
+		padding: 7px 10px;
+		border-radius: 999px;
+		font-size: 12px;
+		font-weight: 700;
+	}
+
+	.dog-info a {
+		color: #c9252d;
+		text-decoration: none;
+		text-transform: uppercase;
+		font-size: 13px;
+		font-weight: 800;
+	}
+
+	.mission-section {
+		padding: 100px 6%;
+		background: #f3ece4;
+	}
+
+	.mission-inner {
+		max-width: 1200px;
+		margin: auto;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 80px;
+	}
+
+	.mission-copy {
+		font-size: 18px;
+		line-height: 1.75;
+		color: #4f4742;
+	}
+
+	.involved-grid {
+		max-width: 1200px;
+		margin: auto;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 24px;
+	}
+
+	.involved-grid > div {
+		padding: 28px;
+		background: white;
+		border-radius: 22px;
+		box-shadow: 0 15px 40px rgba(30,20,18,.06);
+	}
+
+	.involved-grid h3 {
+		font-size: 25px;
+		margin-top: 0;
+	}
+
+	.involved-grid p {
+		color: #665d57;
+		line-height: 1.6;
+	}
+
+	.donate-section {
+		width: min(1200px, calc(100% - 48px));
+		margin: 90px auto;
+		padding: 55px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 40px;
+		background: #c9252d;
+		color: white;
+		border-radius: 30px;
+	}
+
+	.donate-section > div {
+		max-width: 760px;
+	}
+
+	.donate-section > div > p:last-child {
+		font-size: 18px;
+		line-height: 1.6;
+		color: rgba(255,255,255,.85);
+	}
+
+	.light-eyebrow {
+		color: white;
+		opacity: .8;
+	}
+
+	.white-button {
+		background: white;
+		color: #c9252d;
+		white-space: nowrap;
+	}
+
+	.faq-list {
+		max-width: 900px;
+		margin: auto;
+	}
+
+	details {
+		padding: 22px 0;
+		border-bottom: 1px solid rgba(25,20,20,.14);
+	}
+
+	summary {
+		cursor: pointer;
+		font-size: 21px;
+		font-weight: 800;
+	}
+
+	details p {
+		color: #665d57;
+		line-height: 1.65;
+	}
+
+	form {
+		max-width: 760px;
+		margin: auto;
+		display: grid;
+		gap: 15px;
+	}
+
+	input,
+	textarea {
+		width: 100%;
+		padding: 15px;
+		border: 1px solid rgba(25,20,20,.16);
+		border-radius: 14px;
+		font: inherit;
+		background: white;
+	}
+
+	textarea {
+		min-height: 150px;
+		resize: vertical;
+	}
+
+	button {
+		border: 0;
+		background: #c9252d;
+		color: white;
+		padding: 15px 24px;
+		border-radius: 999px;
+		text-transform: uppercase;
+		font-weight: 800;
+		cursor: pointer;
+	}
+
+	.scribble-section {
+		min-height: 180px;
+		position: relative;
+	}
+
+	.scribble-section img {
+		position: absolute;
+		left: 5%;
+		bottom: 0;
+		width: 190px;
+	}
+
+	footer {
+		padding: 55px 6%;
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		align-items: center;
+		gap: 40px;
+		background: #191414;
+		color: white;
+	}
+
+	.footer-logo img {
+		width: 220px;
+		filter: brightness(0) invert(1);
+	}
+
+	footer p {
+		color: rgba(255,255,255,.65);
+		line-height: 1.6;
+	}
+
+	footer div:last-child {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	footer a {
+		color: rgba(255,255,255,.75);
+		text-decoration: none;
+	}
+
+	@media (max-width: 900px) {
+		nav {
+			display: none;
+		}
+
+		.dog-grid,
+		.involved-grid {
+			grid-template-columns: 1fr 1fr;
+		}
+
+		.mission-inner {
+			grid-template-columns: 1fr;
+			gap: 35px;
+		}
+
+		.donate-section {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+
+		footer {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (max-width: 650px) {
+		header {
+			padding: 10px 20px;
+		}
+
+		.logo-wrap img {
+			height: 55px;
+			max-width: 190px;
+		}
+
+		.donate {
+			padding: 12px 16px;
+			font-size: 12px;
+		}
+
+		.hero {
+			min-height: 580px;
+			padding: 60px 24px;
+			background-position: 58% center;
+		}
+
+		h1 {
+			font-size: 48px;
+		}
+
+		.dog-grid,
+		.involved-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.dogs-section,
+		.involved-section,
+		.faq-section,
+		.contact-section,
+		.mission-section {
+			padding: 70px 24px;
+		}
+
+		.donate-section {
+			width: calc(100% - 34px);
+			padding: 34px 26px;
+		}
+
+		.scribble-section img {
+			width: 130px;
+		}
+	}
 </style>

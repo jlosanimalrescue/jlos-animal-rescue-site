@@ -1,10 +1,386 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import DogCard from '../components/DogCard.astro';
-import dogs from '../data/dogs.json';
+const dogFiles = import.meta.glob('../data/dogs/*.json', { eager: true });
+
+const dogs = Object.values(dogFiles).map((file) => file.default);
+
+const availableDogs = dogs.filter((dog) => dog.status === 'Available');
 ---
-<BaseLayout title="Adopt | J-Lo's Animal Rescue">
-<section class="page-hero"><div class="container"><p class="eyebrow">Available Dogs</p><h1 class="section-title">Meet your new best friend.</h1><p class="section-copy">Browse the dogs currently looking for homes. When someone catches your eye, send an inquiry and we'll help determine whether the match feels right.</p></div></section>
-<section class="content-section"><div class="container"><div class="dog-grid">{dogs.filter(d=>d.status==='Available').map((dog)=><DogCard dog={dog}/>)}</div></div></section>
-</BaseLayout>
-<style>.dog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}@media(max-width:950px){.dog-grid{grid-template-columns:1fr 1fr}}@media(max-width:650px){.dog-grid{grid-template-columns:1fr}}</style>
+
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<title>Adopt | J-Lo's Animal Rescue & Sanctuary</title>
+	</head>
+
+	<body>
+		<header>
+			<a class="logo" href="/">
+				<img src="/images/J-lo logo.png" alt="J-Lo's Animal Rescue & Sanctuary" />
+			</a>
+
+			<nav>
+				<a href="/">Home</a>
+				<a class="active" href="/adopt">Adopt</a>
+				<a href="/#mission">Our Mission</a>
+				<a href="/#involved">Get Involved</a>
+				<a href="/#faq">FAQs</a>
+				<a href="/#contact">Contact</a>
+			</nav>
+
+			<a class="donate" href="/#donate">♡ Donate</a>
+		</header>
+
+		<main>
+			<section class="page-hero">
+				<p class="eyebrow">Find Your New Best Friend</p>
+				<h1>Meet the Dogs</h1>
+				<p>
+					Every dog has a story. Every dog deserves a home.
+					Meet the dogs currently available for adoption.
+				</p>
+			</section>
+
+			<section class="dogs-section">
+				<div class="dog-count">
+					<strong>{availableDogs.length}</strong>
+					<span>dogs currently looking for homes</span>
+				</div>
+
+				<div class="dog-grid">
+					{availableDogs.map((dog) => (
+						<article class="dog-card">
+							<div class="dog-photo">
+								{dog.image ? (
+									<img src={dog.image} alt={dog.name} />
+								) : (
+									<div class="placeholder">
+										<span>Photo Coming Soon</span>
+									</div>
+								)}
+							</div>
+
+							<div class="dog-info">
+								<div class="dog-title">
+									<div>
+										<h2>{dog.name}</h2>
+										<p>{dog.breed}</p>
+									</div>
+
+									<span class="available">Available</span>
+								</div>
+
+								<div class="tags">
+									<span>{dog.age}</span>
+									<span>{dog.sex}</span>
+									<span>{dog.size}</span>
+								</div>
+
+								<p class="description">{dog.description}</p>
+
+								<a class="meet-button" href={`/dogs/${dog.slug}`}>
+									Meet {dog.name} →
+								</a>
+							</div>
+						</article>
+					))}
+				</div>
+			</section>
+		</main>
+
+		<footer>
+			<img src="/images/J-lo logo.png" alt="J-Lo's Animal Rescue & Sanctuary" />
+
+			<div>
+				<p>Albany, Georgia</p>
+				<p>From Neglected to Nourished. From Alone to Adored.</p>
+			</div>
+
+			<a href="/">Back Home</a>
+		</footer>
+	</body>
+</html>
+
+<style>
+	:global(*) {
+		box-sizing: border-box;
+	}
+
+	:global(body) {
+		margin: 0;
+		font-family: Arial, Helvetica, sans-serif;
+		background: #faf7f2;
+		color: #191414;
+	}
+
+	header {
+		min-height: 96px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 10px 5%;
+		gap: 30px;
+		background: #faf7f2;
+	}
+
+	.logo img {
+		display: block;
+		width: auto;
+		height: 72px;
+		max-width: 270px;
+		object-fit: contain;
+	}
+
+	nav {
+		display: flex;
+		align-items: center;
+		gap: 30px;
+	}
+
+	nav a {
+		color: #191414;
+		text-decoration: none;
+		font-size: 14px;
+		font-weight: 700;
+	}
+
+	nav .active {
+		color: #c9252d;
+	}
+
+	.donate {
+		background: #c9252d;
+		color: white;
+		text-decoration: none;
+		text-transform: uppercase;
+		font-weight: 800;
+		padding: 15px 24px;
+		border-radius: 999px;
+		white-space: nowrap;
+	}
+
+	.page-hero {
+		padding: 90px 24px 70px;
+		text-align: center;
+		background: #f3ece4;
+	}
+
+	.eyebrow {
+		margin: 0 0 12px;
+		color: #c9252d;
+		font-size: 12px;
+		font-weight: 800;
+		letter-spacing: 2px;
+		text-transform: uppercase;
+	}
+
+	.page-hero h1 {
+		margin: 0;
+		font-size: clamp(52px, 7vw, 88px);
+		line-height: 1;
+		letter-spacing: -4px;
+	}
+
+	.page-hero > p:last-child {
+		max-width: 650px;
+		margin: 24px auto 0;
+		font-size: 18px;
+		line-height: 1.6;
+		color: #665d57;
+	}
+
+	.dogs-section {
+		max-width: 1250px;
+		margin: auto;
+		padding: 70px 30px 110px;
+	}
+
+	.dog-count {
+		display: flex;
+		align-items: baseline;
+		gap: 10px;
+		margin-bottom: 30px;
+		color: #665d57;
+	}
+
+	.dog-count strong {
+		color: #c9252d;
+		font-size: 30px;
+	}
+
+	.dog-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 26px;
+	}
+
+	.dog-card {
+		overflow: hidden;
+		background: white;
+		border: 1px solid rgba(25,20,20,.08);
+		border-radius: 24px;
+		box-shadow: 0 18px 45px rgba(30,20,18,.07);
+	}
+
+	.dog-photo {
+		aspect-ratio: 4 / 3;
+		background: #e9e2da;
+		overflow: hidden;
+	}
+
+	.dog-photo img {
+		width: 100%;
+		height: 100%;
+		display: block;
+		object-fit: cover;
+	}
+
+	.placeholder {
+		width: 100%;
+		height: 100%;
+		display: grid;
+		place-items: center;
+		color: #81766e;
+		font-weight: 700;
+	}
+
+	.dog-info {
+		padding: 24px;
+	}
+
+	.dog-title {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		gap: 15px;
+	}
+
+	.dog-title h2 {
+		margin: 0;
+		font-size: 30px;
+	}
+
+	.dog-title p {
+		margin: 5px 0 0;
+		color: #665d57;
+	}
+
+	.available {
+		padding: 6px 9px;
+		border-radius: 999px;
+		background: #f3ece4;
+		color: #c9252d;
+		font-size: 10px;
+		font-weight: 800;
+		text-transform: uppercase;
+	}
+
+	.tags {
+		display: flex;
+		gap: 8px;
+		flex-wrap: wrap;
+		margin: 20px 0;
+	}
+
+	.tags span {
+		padding: 7px 10px;
+		background: #f3ece4;
+		border-radius: 999px;
+		font-size: 12px;
+		font-weight: 700;
+	}
+
+	.description {
+		min-height: 48px;
+		color: #665d57;
+		line-height: 1.5;
+	}
+
+	.meet-button {
+		display: inline-block;
+		margin-top: 8px;
+		color: #c9252d;
+		text-decoration: none;
+		text-transform: uppercase;
+		font-size: 13px;
+		font-weight: 800;
+	}
+
+	footer {
+		padding: 50px 6%;
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		align-items: center;
+		gap: 40px;
+		background: #191414;
+		color: white;
+	}
+
+	footer img {
+		width: 220px;
+		filter: brightness(0) invert(1);
+	}
+
+	footer p {
+		color: rgba(255,255,255,.65);
+	}
+
+	footer > a {
+		justify-self: end;
+		color: white;
+		text-decoration: none;
+		font-weight: 700;
+	}
+
+	@media (max-width: 900px) {
+		nav {
+			display: none;
+		}
+
+		.dog-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		footer {
+			grid-template-columns: 1fr;
+		}
+
+		footer > a {
+			justify-self: start;
+		}
+	}
+
+	@media (max-width: 650px) {
+		header {
+			padding: 10px 20px;
+		}
+
+		.logo img {
+			height: 55px;
+			max-width: 190px;
+		}
+
+		.donate {
+			padding: 12px 16px;
+			font-size: 12px;
+		}
+
+		.page-hero {
+			padding: 65px 24px 55px;
+		}
+
+		.page-hero h1 {
+			font-size: 54px;
+			letter-spacing: -3px;
+		}
+
+		.dogs-section {
+			padding: 50px 20px 80px;
+		}
+
+		.dog-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

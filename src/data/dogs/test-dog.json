@@ -1,0 +1,12 @@
+{
+  "size": "Large",
+  "sex": "Male",
+  "name": "test dog",
+  "slug": "test-dog",
+  "featured": true,
+  "status": "Available",
+  "breed": "laborador mix",
+  "image": "/images/dogs/16497ddc434db8e00e98c6c71de1c52b.jpg",
+  "description": "test dog for site",
+  "age": "4 years"
+}
