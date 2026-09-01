@@ -51,7 +51,7 @@ const featuredDogs = dogs
 					</p>
 
 					<div class="hero-buttons">
-						<a class="primary-button" href="#dogs">Meet the Dogs</a>
+						<a class="primary-button" href="/adopt">Meet the Dogs</a>
 <a class="donate" href="https://givebutter.com/10k-for-10-years-wiozf4" target="_blank">♡ Donate</a>					</div>
 				</div>
 			</section>
@@ -84,7 +84,7 @@ const featuredDogs = dogs
 					<span>{dog.size}</span>
 				</div>
 
-				<a href="#contact">Meet {dog.name} →</a>
+				<a href={`/dogs/${dog.slug}`}>Meet {dog.name} →</a>
 			</div>
 		</article>
 	))}
@@ -93,28 +93,35 @@ const featuredDogs = dogs
 
 			<section class="mission-section" id="mission">
 				<div class="mission-inner">
-					<div>
-						<p class="eyebrow">Our Mission</p>
-						<h2>A life-saving dream made real.</h2>
+					<div class="mission-photo">
+						<img
+							src="/images/jessica-lopez.jpg"
+							alt="Jessica Lopez with a rescue dog"
+						/>
 					</div>
 
-					<div class="mission-copy">
-						<p>
-							Founded by Jessica Lopez, a wife and mother of three, J-Lo Animal Rescue
-							is a heartfelt life-long dream of Jessica’s that has blossomed into a
-							life-saving reality in Albany, Ga.
-						</p>
+					<div class="mission-content">
+						<p class="eyebrow">Our Mission</p>
+						<h2>A life-saving dream made real.</h2>
 
-						<p>
-							What started as a mission to save several emaciated dogs discovered in
-							a local backyard has grown into a thriving non-profit sanctuary that now
-							provides a safe haven for over 60 dogs at a time.
-						</p>
+						<div class="mission-copy">
+							<p>
+								Founded by Jessica Lopez, a wife and mother of three, J-Lo Animal Rescue
+								is a heartfelt life-long dream of Jessica’s that has blossomed into a
+								life-saving reality in Albany, Ga.
+							</p>
 
-						<p>
-							We are dedicated to transforming lives through compassion and faith,
-							ensuring that every animal in our care finds the love and dignity they deserve.
-						</p>
+							<p>
+								What started as a mission to save several emaciated dogs discovered in
+								a local backyard has grown into a thriving non-profit sanctuary that now
+								provides a safe haven for over 60 dogs at a time.
+							</p>
+
+							<p>
+								We are dedicated to transforming lives through compassion and faith,
+								ensuring that every animal in our care finds the love and dignity they deserve.
+							</p>
+						</div>
 					</div>
 				</div>
 			</section>
@@ -132,11 +139,17 @@ const featuredDogs = dogs
 					</div>
 
 					<div>
-<a class="donate" href="https://givebutter.com/10k-for-10-years-wiozf4" target="_blank">♡ Donate</a>						<p>Help cover food, veterinary care, supplies, transportation, and daily needs.</p>
+						<h3>Donate</h3>
+						<p>Help cover food, veterinary care, supplies, transportation, and daily needs.</p>
 					</div>
 
 					<div>
 						<h3>Volunteer</h3>
+						<p>Give your time and skills to help support the sanctuary and the dogs.</p>
+					</div>
+				</div>
+			</section>
+
 			<section class="donate-section" id="donate">
 				<div>
 					<p class="eyebrow light-eyebrow">Join Our Rescue Pack</p>
@@ -156,6 +169,12 @@ const featuredDogs = dogs
 					Donate Today
 				</a>
 			</section>
+
+			<section class="faq-section" id="faq">
+				<div class="section-heading">
+					<p class="eyebrow">FAQs</p>
+					<h2>Before You Adopt</h2>
+				</div>
 
 				<div class="faq-list">
 					<details>
@@ -213,7 +232,7 @@ const featuredDogs = dogs
 			</div>
 
 			<div>
-				<a href="#dogs">"/adopt">Meet the Dogs</a>
+				<a href="/adopt">Meet the Dogs</a>
 				<a href="#mission">Our Mission</a>
 				<a href="#involved">Get Involved</a>
 				<a href="#contact">Contact</a>
@@ -334,13 +353,19 @@ const featuredDogs = dogs
 	.primary-button,
 	.secondary-button,
 	.white-button {
-		display: inline-block;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 48px;
 		padding: 15px 25px;
 		border-radius: 999px;
 		text-decoration: none;
 		text-transform: uppercase;
 		font-size: 13px;
 		font-weight: 800;
+		line-height: 1;
+		letter-spacing: .4px;
+		white-space: nowrap;
 	}
 
 	.primary-button {
@@ -461,14 +486,41 @@ const featuredDogs = dogs
 		max-width: 1200px;
 		margin: auto;
 		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 80px;
+		grid-template-columns: minmax(320px, .9fr) 1.1fr;
+		gap: 70px;
+		align-items: center;
+	}
+
+	.mission-photo {
+		overflow: hidden;
+		border-radius: 28px;
+		box-shadow: 0 20px 55px rgba(30,20,18,.12);
+	}
+
+	.mission-photo img {
+		display: block;
+		width: 100%;
+		aspect-ratio: 4 / 5;
+		object-fit: cover;
+		object-position: center;
+	}
+
+	.mission-content h2 {
+		margin-bottom: 28px;
 	}
 
 	.mission-copy {
 		font-size: 18px;
 		line-height: 1.75;
 		color: #4f4742;
+	}
+
+	.mission-copy p:first-child {
+		margin-top: 0;
+	}
+
+	.mission-copy p:last-child {
+		margin-bottom: 0;
 	}
 
 	.involved-grid {
@@ -640,6 +692,10 @@ const featuredDogs = dogs
 		.mission-inner {
 			grid-template-columns: 1fr;
 			gap: 35px;
+		}
+
+		.mission-photo {
+			max-width: 620px;
 		}
 
 		.donate-section {
