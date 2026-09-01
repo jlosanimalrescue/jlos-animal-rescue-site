@@ -1,12 +1,12 @@
 {
+  "size": "Medium",
+  "sex": "Female",
   "name": "Rosie",
   "slug": "rosie",
-  "breed": "Mixed Breed",
-  "age": "1 year",
-  "sex": "Female",
-  "size": "Medium",
-  "status": "Available",
   "featured": true,
-  "image": "",
-  "description": "Rosie is looking for her forever home."
+  "status": "Available",
+  "breed": "Mixed Breed",
+  "image": "/images/dogs/16497ddc434db8e00e98c6c71de1c52b.jpg",
+  "description": "Rosie is looking for her forever home.",
+  "age": "1 year"
 }
