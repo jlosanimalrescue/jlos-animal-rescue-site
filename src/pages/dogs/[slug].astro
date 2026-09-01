@@ -1,16 +1,19 @@
 ---
 export function getStaticPaths() {
-  const dogFiles = import.meta.glob('../../data/dogs/*.json', { eager: true });
+	const dogFiles = import.meta.glob('../../data/dogs/*.json', { eager: true });
 
-  const dogs = Object.values(dogFiles).map((file: any) => file.default);
+	const dogs = Object.values(dogFiles).map((file: any) => file.default);
 
-  return dogs.map((dog) => ({
-    params: { slug: dog.slug },
-    props: { dog }
-  }));
+	return dogs.map((dog) => ({
+		params: { slug: dog.slug },
+		props: { dog }
+	}));
 }
 
 const { dog } = Astro.props;
+
+const isAvailable = dog.status === 'Available';
+const isPending = dog.status === 'Pending';
 ---
 
 <html lang="en">
@@ -19,12 +22,19 @@ const { dog } = Astro.props;
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<title>{dog.name} | J-Lo's Animal Rescue & Sanctuary</title>
+		<meta
+			name="description"
+			content={`Meet ${dog.name}, a ${dog.age} ${dog.breed} available through J-Lo's Animal Rescue & Sanctuary.`}
+		/>
 	</head>
 
 	<body>
 		<header>
 			<a class="logo" href="/">
-				<img src="/images/J-lo logo.png" alt="J-Lo's Animal Rescue & Sanctuary" />
+				<img
+					src="/images/J-lo logo.png"
+					alt="J-Lo's Animal Rescue & Sanctuary"
+				/>
 			</a>
 
 			<nav>
@@ -40,47 +50,166 @@ const { dog } = Astro.props;
 		</header>
 
 		<main>
-			<section class="dog-profile">
-				<div class="dog-photo">
-					{dog.image ? (
-						<img src={dog.image} alt={dog.name} />
-					) : (
-						<div class="placeholder">
-							<span>Photo Coming Soon</span>
-						</div>
-					)}
-				</div>
+			<section class="profile-wrap">
+				<a class="back-top" href="/adopt">
+					← Back to All Dogs
+				</a>
 
-				<div class="dog-details">
-					<p class="eyebrow">{dog.status}</p>
-
-					<h1>{dog.name}</h1>
-
-					<p class="breed">{dog.breed}</p>
-
-					<div class="tags">
-						<span>{dog.age}</span>
-						<span>{dog.sex}</span>
-						<span>{dog.size}</span>
+				<div class="dog-profile">
+					<div class="dog-photo">
+						{dog.image ? (
+							<img src={dog.image} alt={dog.name} />
+						) : (
+							<div class="placeholder">
+								<span>Photo Coming Soon</span>
+							</div>
+						)}
 					</div>
 
-					<p class="description">
-						{dog.description}
-					</p>
+					<div class="dog-details">
+						<div class:list={[
+							'status',
+							isAvailable && 'available',
+							isPending && 'pending'
+						]}>
+							<span class="status-dot"></span>
+							{dog.status}
+						</div>
 
-					<a class="inquire-button" href={`/#contact`}>
-						Inquire About {dog.name}
-					</a>
+						<h1>{dog.name}</h1>
 
-					<a class="back-link" href="/adopt">
-						← Back to All Dogs
-					</a>
+						<p class="breed">{dog.breed}</p>
+
+						<div class="quick-info">
+							<div class="info-item">
+								<span class="info-label">Age</span>
+								<strong>{dog.age}</strong>
+							</div>
+
+							<div class="info-item">
+								<span class="info-label">Sex</span>
+								<strong>{dog.sex}</strong>
+							</div>
+
+							<div class="info-item">
+								<span class="info-label">Size</span>
+								<strong>{dog.size}</strong>
+							</div>
+						</div>
+
+						<div class="about">
+							<p class="section-label">Meet {dog.name}</p>
+
+							<p class="description">
+								{dog.description}
+							</p>
+						</div>
+
+						{isAvailable ? (
+							<div class="adoption-box">
+								<p class="adoption-eyebrow">
+									Think {dog.name} might be the one?
+								</p>
+
+								<h2>Give {dog.name} a forever home.</h2>
+
+								<p>
+									Submit an inquiry and we'll help determine whether
+									{dog.name} could be the right fit for your home and family.
+								</p>
+
+								<a class="inquire-button" href="/#contact">
+									I'm Interested in {dog.name} →
+								</a>
+							</div>
+						) : isPending ? (
+							<div class="adoption-box pending-box">
+								<p class="adoption-eyebrow">Adoption Pending</p>
+
+								<h2>{dog.name} may have found a home.</h2>
+
+								<p>
+									An adoption is currently in progress, but you can still
+									browse the other dogs waiting for their forever families.
+								</p>
+
+								<a class="secondary-button" href="/adopt">
+									Meet More Dogs →
+								</a>
+							</div>
+						) : (
+							<div class="adoption-box adopted-box">
+								<p class="adoption-eyebrow">Happy Tails</p>
+
+								<h2>{dog.name} found a forever home!</h2>
+
+								<p>
+									There are still more dogs waiting for someone to choose
+									them.
+								</p>
+
+								<a class="secondary-button" href="/adopt">
+									Meet Available Dogs →
+								</a>
+							</div>
+						)}
+					</div>
 				</div>
+			</section>
+
+			<section class="process">
+				<div class="process-heading">
+					<p class="section-label">What Happens Next?</p>
+					<h2>Adoption starts with a conversation.</h2>
+					<p>
+						Our goal is to make sure every dog finds a home where they can
+						truly thrive.
+					</p>
+				</div>
+
+				<div class="process-grid">
+					<div class="process-step">
+						<span>01</span>
+						<h3>Inquire</h3>
+						<p>
+							Tell us you're interested and complete an adoption application.
+						</p>
+					</div>
+
+					<div class="process-step">
+						<span>02</span>
+						<h3>Let's Talk</h3>
+						<p>
+							We'll learn about your home and help determine whether the match
+							feels right.
+						</p>
+					</div>
+
+					<div class="process-step">
+						<span>03</span>
+						<h3>Welcome Home</h3>
+						<p>
+							Once approved and adoption requirements are completed, it's time
+							to bring your new family member home.
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section class="more-dogs">
+				<p>Not sure {dog.name} is your match?</p>
+
+				<a href="/adopt">
+					Meet All Available Dogs →
+				</a>
 			</section>
 		</main>
 
 		<footer>
-			<img src="/images/J-lo logo.png" alt="J-Lo's Animal Rescue & Sanctuary" />
+			<img
+				src="/images/J-lo logo.png"
+				alt="J-Lo's Animal Rescue & Sanctuary"
+			/>
 
 			<div>
 				<p>Albany, Georgia</p>
@@ -95,6 +224,10 @@ const { dog } = Astro.props;
 <style>
 	:global(*) {
 		box-sizing: border-box;
+	}
+
+	:global(html) {
+		scroll-behavior: smooth;
 	}
 
 	:global(body) {
@@ -112,6 +245,7 @@ const { dog } = Astro.props;
 		padding: 10px 5%;
 		gap: 30px;
 		background: #faf7f2;
+		border-bottom: 1px solid rgba(25, 20, 20, 0.06);
 	}
 
 	.logo img {
@@ -135,6 +269,10 @@ const { dog } = Astro.props;
 		font-weight: 700;
 	}
 
+	nav a:hover {
+		color: #c9252d;
+	}
+
 	.donate {
 		background: #c9252d;
 		color: white;
@@ -144,22 +282,41 @@ const { dog } = Astro.props;
 		padding: 15px 24px;
 		border-radius: 999px;
 		white-space: nowrap;
+		font-size: 13px;
+	}
+
+	.profile-wrap {
+		max-width: 1280px;
+		margin: 0 auto;
+		padding: 45px 40px 100px;
+	}
+
+	.back-top {
+		display: inline-block;
+		margin-bottom: 32px;
+		color: #70665f;
+		text-decoration: none;
+		font-size: 14px;
+		font-weight: 700;
+	}
+
+	.back-top:hover {
+		color: #c9252d;
 	}
 
 	.dog-profile {
-		max-width: 1200px;
-		margin: auto;
-		padding: 80px 30px 110px;
 		display: grid;
-		grid-template-columns: 1.05fr .95fr;
-		gap: 60px;
-		align-items: center;
+		grid-template-columns: minmax(0, 1.08fr) minmax(380px, 0.92fr);
+		gap: 72px;
+		align-items: start;
 	}
 
 	.dog-photo {
-		aspect-ratio: 4 / 3;
+		position: sticky;
+		top: 30px;
+		aspect-ratio: 4 / 5;
 		overflow: hidden;
-		border-radius: 28px;
+		border-radius: 32px;
 		background: #e9e2da;
 	}
 
@@ -179,69 +336,253 @@ const { dog } = Astro.props;
 		font-weight: 700;
 	}
 
-	.eyebrow {
-		margin: 0 0 12px;
-		color: #c9252d;
-		font-size: 12px;
-		font-weight: 800;
-		letter-spacing: 2px;
+	.dog-details {
+		padding-top: 10px;
+	}
+
+	.status {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		margin-bottom: 18px;
+		padding: 8px 12px;
+		border-radius: 999px;
+		background: #eee7df;
+		color: #665d57;
+		font-size: 11px;
+		font-weight: 900;
+		letter-spacing: 1.5px;
 		text-transform: uppercase;
+	}
+
+	.status-dot {
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		background: #81766e;
+	}
+
+	.status.available {
+		background: #f6e3e3;
+		color: #b72029;
+	}
+
+	.status.available .status-dot {
+		background: #c9252d;
+	}
+
+	.status.pending {
+		background: #f4ead2;
+		color: #8a6b21;
+	}
+
+	.status.pending .status-dot {
+		background: #b68c2d;
 	}
 
 	h1 {
 		margin: 0;
-		font-size: clamp(58px, 7vw, 92px);
-		line-height: .95;
-		letter-spacing: -4px;
+		font-size: clamp(64px, 7vw, 100px);
+		line-height: .88;
+		letter-spacing: -5px;
 	}
 
 	.breed {
-		margin: 14px 0 0;
-		font-size: 22px;
+		margin: 18px 0 0;
+		font-size: 23px;
 		color: #665d57;
 	}
 
-	.tags {
-		display: flex;
-		gap: 9px;
-		flex-wrap: wrap;
-		margin: 26px 0;
+	.quick-info {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		margin: 36px 0 42px;
+		border-top: 1px solid #ded6ce;
+		border-bottom: 1px solid #ded6ce;
 	}
 
-	.tags span {
-		padding: 8px 11px;
-		background: #f3ece4;
-		border-radius: 999px;
-		font-size: 13px;
-		font-weight: 700;
+	.info-item {
+		padding: 22px 16px 22px 0;
+	}
+
+	.info-item + .info-item {
+		padding-left: 20px;
+		border-left: 1px solid #ded6ce;
+	}
+
+	.info-label {
+		display: block;
+		margin-bottom: 7px;
+		color: #8b8179;
+		font-size: 10px;
+		font-weight: 900;
+		letter-spacing: 1.5px;
+		text-transform: uppercase;
+	}
+
+	.info-item strong {
+		font-size: 16px;
+	}
+
+	.section-label {
+		margin: 0 0 12px;
+		color: #c9252d;
+		font-size: 11px;
+		font-weight: 900;
+		letter-spacing: 2px;
+		text-transform: uppercase;
+	}
+
+	.about {
+		margin-bottom: 38px;
 	}
 
 	.description {
-		margin: 0 0 30px;
+		margin: 0;
 		font-size: 18px;
-		line-height: 1.75;
+		line-height: 1.8;
 		color: #514943;
 	}
 
-	.inquire-button {
-		display: inline-block;
-		padding: 15px 24px;
-		background: #c9252d;
+	.adoption-box {
+		padding: 32px;
+		border-radius: 24px;
+		background: #191414;
 		color: white;
+	}
+
+	.adoption-eyebrow {
+		margin: 0 0 9px;
+		color: #ef777d;
+		font-size: 11px;
+		font-weight: 900;
+		letter-spacing: 1.5px;
+		text-transform: uppercase;
+	}
+
+	.adoption-box h2 {
+		margin: 0;
+		font-size: 31px;
+		line-height: 1.05;
+		letter-spacing: -1.2px;
+	}
+
+	.adoption-box > p:not(.adoption-eyebrow) {
+		margin: 16px 0 24px;
+		color: rgba(255, 255, 255, .7);
+		font-size: 15px;
+		line-height: 1.65;
+	}
+
+	.inquire-button,
+	.secondary-button {
+		display: inline-block;
+		padding: 15px 21px;
 		border-radius: 999px;
 		text-decoration: none;
 		text-transform: uppercase;
-		font-size: 13px;
-		font-weight: 800;
+		font-size: 12px;
+		font-weight: 900;
+		letter-spacing: .3px;
 	}
 
-	.back-link {
-		display: block;
-		margin-top: 20px;
+	.inquire-button {
+		background: #c9252d;
+		color: white;
+	}
+
+	.secondary-button {
+		background: white;
+		color: #191414;
+	}
+
+	.pending-box {
+		background: #352f29;
+	}
+
+	.adopted-box {
+		background: #332f2c;
+	}
+
+	.process {
+		padding: 90px 6%;
+		background: #f1eae2;
+	}
+
+	.process-heading {
+		max-width: 680px;
+		margin: 0 auto 55px;
+		text-align: center;
+	}
+
+	.process-heading h2 {
+		margin: 0;
+		font-size: clamp(36px, 5vw, 58px);
+		line-height: 1;
+		letter-spacing: -2.5px;
+	}
+
+	.process-heading > p:last-child {
+		max-width: 540px;
+		margin: 20px auto 0;
 		color: #665d57;
-		text-decoration: none;
+		font-size: 17px;
+		line-height: 1.7;
+	}
+
+	.process-grid {
+		max-width: 1100px;
+		margin: 0 auto;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 18px;
+	}
+
+	.process-step {
+		padding: 34px;
+		border-radius: 22px;
+		background: #faf7f2;
+	}
+
+	.process-step span {
+		color: #c9252d;
+		font-size: 12px;
+		font-weight: 900;
+		letter-spacing: 1px;
+	}
+
+	.process-step h3 {
+		margin: 28px 0 10px;
+		font-size: 23px;
+	}
+
+	.process-step p {
+		margin: 0;
+		color: #665d57;
+		font-size: 15px;
+		line-height: 1.65;
+	}
+
+	.more-dogs {
+		padding: 65px 30px;
+		text-align: center;
+	}
+
+	.more-dogs p {
+		margin: 0 0 13px;
+		color: #776d66;
 		font-size: 14px;
-		font-weight: 700;
+	}
+
+	.more-dogs a {
+		color: #191414;
+		text-decoration: none;
+		font-size: 21px;
+		font-weight: 900;
+	}
+
+	.more-dogs a:hover {
+		color: #c9252d;
 	}
 
 	footer {
@@ -260,7 +601,7 @@ const { dog } = Astro.props;
 	}
 
 	footer p {
-		color: rgba(255,255,255,.65);
+		color: rgba(255, 255, 255, .65);
 	}
 
 	footer > a {
@@ -270,14 +611,23 @@ const { dog } = Astro.props;
 		font-weight: 700;
 	}
 
-	@media (max-width: 900px) {
+	@media (max-width: 950px) {
 		nav {
 			display: none;
 		}
 
 		.dog-profile {
 			grid-template-columns: 1fr;
-			gap: 35px;
+			gap: 42px;
+		}
+
+		.dog-photo {
+			position: static;
+			aspect-ratio: 4 / 3;
+		}
+
+		.process-grid {
+			grid-template-columns: 1fr;
 		}
 
 		footer {
@@ -291,6 +641,7 @@ const { dog } = Astro.props;
 
 	@media (max-width: 650px) {
 		header {
+			min-height: 80px;
 			padding: 10px 20px;
 		}
 
@@ -301,16 +652,85 @@ const { dog } = Astro.props;
 
 		.donate {
 			padding: 12px 16px;
-			font-size: 12px;
+			font-size: 11px;
+		}
+
+		.profile-wrap {
+			padding: 28px 20px 65px;
+		}
+
+		.back-top {
+			margin-bottom: 22px;
 		}
 
 		.dog-profile {
-			padding: 50px 20px 80px;
+			gap: 30px;
+		}
+
+		.dog-photo {
+			aspect-ratio: 1 / 1;
+			border-radius: 22px;
 		}
 
 		h1 {
 			font-size: 58px;
 			letter-spacing: -3px;
+		}
+
+		.breed {
+			font-size: 19px;
+		}
+
+		.quick-info {
+			margin: 28px 0 34px;
+		}
+
+		.info-item {
+			padding: 18px 8px 18px 0;
+		}
+
+		.info-item + .info-item {
+			padding-left: 12px;
+		}
+
+		.description {
+			font-size: 16px;
+		}
+
+		.adoption-box {
+			padding: 25px;
+		}
+
+		.adoption-box h2 {
+			font-size: 27px;
+		}
+
+		.inquire-button,
+		.secondary-button {
+			width: 100%;
+			text-align: center;
+		}
+
+		.process {
+			padding: 65px 20px;
+		}
+
+		.process-heading {
+			text-align: left;
+			margin-bottom: 35px;
+		}
+
+		.process-heading h2 {
+			font-size: 40px;
+			letter-spacing: -2px;
+		}
+
+		.process-step {
+			padding: 27px;
+		}
+
+		.more-dogs {
+			padding: 50px 20px;
 		}
 	}
 </style>
