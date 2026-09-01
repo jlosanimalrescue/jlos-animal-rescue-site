@@ -1,9 +1,13 @@
 ---
 const dogFiles = import.meta.glob('../data/dogs/*.json', { eager: true });
 
-const dogs = Object.values(dogFiles).map((file) => file.default);
+const dogs = Object.values(dogFiles).map((file: any) => file.default);
 
 const availableDogs = dogs.filter((dog) => dog.status === 'Available');
+
+const displayedDogs = dogs.filter(
+	(dog) => dog.status === 'Available' || dog.status === 'Adopted'
+);
 ---
 
 <html lang="en">
@@ -29,7 +33,14 @@ const availableDogs = dogs.filter((dog) => dog.status === 'Available');
 				<a href="/#contact">Contact</a>
 			</nav>
 
-			<a class="donate" href="/#donate">♡ Donate</a>
+			<a
+				class="donate"
+				href="https://givebutter.com/10k-for-10-years-wiozf4"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				♡ Donate
+			</a>
 		</header>
 
 		<main>
@@ -49,14 +60,26 @@ const availableDogs = dogs.filter((dog) => dog.status === 'Available');
 				</div>
 
 				<div class="dog-grid">
-					{availableDogs.map((dog) => (
-						<article class="dog-card">
-							<div class="dog-photo">
+					{displayedDogs.map((dog) => (
+						<article class:list={[
+							'dog-card',
+							dog.status === 'Adopted' && 'adopted-card'
+						]}>
+							<div class:list={[
+								'dog-photo',
+								dog.status === 'Adopted' && 'adopted-photo'
+							]}>
 								{dog.image ? (
 									<img src={dog.image} alt={dog.name} />
 								) : (
 									<div class="placeholder">
 										<span>Photo Coming Soon</span>
+									</div>
+								)}
+
+								{dog.status === 'Adopted' && (
+									<div class="adopted-overlay">
+										<span>ADOPTED! ❤️</span>
 									</div>
 								)}
 							</div>
@@ -68,7 +91,12 @@ const availableDogs = dogs.filter((dog) => dog.status === 'Available');
 										<p>{dog.breed}</p>
 									</div>
 
-									<span class="available">Available</span>
+									<span class:list={[
+										'status-badge',
+										dog.status === 'Adopted' && 'adopted-badge'
+									]}>
+										{dog.status}
+									</span>
 								</div>
 
 								<div class="tags">
@@ -79,9 +107,15 @@ const availableDogs = dogs.filter((dog) => dog.status === 'Available');
 
 								<p class="description">{dog.description}</p>
 
-								<a class="meet-button" href={`/dogs/${dog.slug}`}>
-									Meet {dog.name} →
-								</a>
+								{dog.status === 'Adopted' ? (
+									<span class="adopted-message">
+										Found Their Forever Home ❤️
+									</span>
+								) : (
+									<a class="meet-button" href={`/dogs/${dog.slug}`}>
+										Meet {dog.name} →
+									</a>
+								)}
 							</div>
 						</article>
 					))}
@@ -221,9 +255,20 @@ const availableDogs = dogs.filter((dog) => dog.status === 'Available');
 		border: 1px solid rgba(25,20,20,.08);
 		border-radius: 24px;
 		box-shadow: 0 18px 45px rgba(30,20,18,.07);
+		transition: transform .2s ease, box-shadow .2s ease;
+	}
+
+	.dog-card:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 22px 50px rgba(30,20,18,.1);
+	}
+
+	.adopted-card {
+		background: #fff8f8;
 	}
 
 	.dog-photo {
+		position: relative;
 		aspect-ratio: 4 / 3;
 		background: #e9e2da;
 		overflow: hidden;
@@ -234,6 +279,31 @@ const availableDogs = dogs.filter((dog) => dog.status === 'Available');
 		height: 100%;
 		display: block;
 		object-fit: cover;
+	}
+
+	.adopted-photo img {
+		filter: grayscale(35%);
+		opacity: .72;
+	}
+
+	.adopted-overlay {
+		position: absolute;
+		inset: 0;
+		display: grid;
+		place-items: center;
+		background: rgba(201, 37, 45, .30);
+	}
+
+	.adopted-overlay span {
+		padding: 13px 20px;
+		border-radius: 999px;
+		background: #c9252d;
+		color: white;
+		font-size: 18px;
+		font-weight: 900;
+		letter-spacing: 1px;
+		transform: rotate(-5deg);
+		box-shadow: 0 8px 20px rgba(0,0,0,.18);
 	}
 
 	.placeholder {
@@ -266,7 +336,7 @@ const availableDogs = dogs.filter((dog) => dog.status === 'Available');
 		color: #665d57;
 	}
 
-	.available {
+	.status-badge {
 		padding: 6px 9px;
 		border-radius: 999px;
 		background: #f3ece4;
@@ -274,6 +344,12 @@ const availableDogs = dogs.filter((dog) => dog.status === 'Available');
 		font-size: 10px;
 		font-weight: 800;
 		text-transform: uppercase;
+		white-space: nowrap;
+	}
+
+	.adopted-badge {
+		background: #c9252d;
+		color: white;
 	}
 
 	.tags {
@@ -305,6 +381,15 @@ const availableDogs = dogs.filter((dog) => dog.status === 'Available');
 		text-transform: uppercase;
 		font-size: 13px;
 		font-weight: 800;
+	}
+
+	.adopted-message {
+		display: inline-block;
+		margin-top: 8px;
+		color: #c9252d;
+		font-size: 13px;
+		font-weight: 800;
+		text-transform: uppercase;
 	}
 
 	footer {
