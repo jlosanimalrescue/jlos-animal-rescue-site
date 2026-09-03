@@ -10,9 +10,9 @@
   },
   "campaign1": {
     "enabled": false,
-    "title": "test 12",
+    "title": "",
     "description": "",
-    "image": "/images/dogs/screenshot-2026-09-01-at-10.12.04 am.png",
+    "image": "",
     "embedUrl": "",
     "buttonText": "",
     "buttonLink": ""
