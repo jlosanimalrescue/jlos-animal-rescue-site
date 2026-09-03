@@ -1,4 +1,6 @@
 ---
+import homepage from '../data/homepage.json';
+
 const dogFiles = import.meta.glob('../data/dogs/*.json', { eager: true });
 
 const dogs = Object.values(dogFiles).map((file: any) => file.default);
@@ -6,6 +8,10 @@ const dogs = Object.values(dogFiles).map((file: any) => file.default);
 const featuredDogs = dogs
   .filter((dog) => dog.featured && dog.status === 'Available')
   .slice(0, 3);
+
+const campaignSections = [homepage.campaign1, homepage.campaign2].filter(
+  (campaign) => campaign?.enabled
+);
 ---
 
 <html lang="en">
@@ -149,6 +155,45 @@ const featuredDogs = dogs
 					</div>
 				</div>
 			</section>
+
+			{campaignSections.map((campaign) => (
+				<section class="campaign-section">
+					<div class="campaign-inner">
+						{campaign.image && (
+							<div class="campaign-image">
+								<img src={campaign.image} alt={campaign.title || 'Campaign'} />
+							</div>
+						)}
+
+						<div class="campaign-content">
+							<p class="eyebrow">Featured Campaign</p>
+							{campaign.title && <h2>{campaign.title}</h2>}
+							{campaign.description && <p>{campaign.description}</p>}
+
+							{campaign.embedUrl && (
+								<div class="campaign-embed">
+									<iframe
+										src={campaign.embedUrl}
+										title={campaign.title || 'Campaign'}
+										loading="lazy"
+									></iframe>
+								</div>
+							)}
+
+							{campaign.buttonText && campaign.buttonLink && (
+								<a
+									class="primary-button campaign-button"
+									href={campaign.buttonLink}
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									{campaign.buttonText}
+								</a>
+							)}
+						</div>
+					</div>
+				</section>
+			))}
 
 			<section class="donate-section" id="donate">
 				<div>
@@ -402,7 +447,8 @@ const featuredDogs = dogs
 
 	.section-heading h2,
 	.mission-section h2,
-	.donate-section h2 {
+	.donate-section h2,
+	.campaign-section h2 {
 		margin: 0;
 		font-size: clamp(40px, 5vw, 64px);
 		line-height: 1;
@@ -548,6 +594,61 @@ const featuredDogs = dogs
 		line-height: 1.6;
 	}
 
+	.campaign-section {
+		padding: 20px 6% 80px;
+	}
+
+	.campaign-inner {
+		max-width: 1200px;
+		margin: auto;
+		display: grid;
+		grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+		gap: 48px;
+		align-items: center;
+		padding: 38px;
+		background: white;
+		border: 1px solid rgba(25,20,20,.08);
+		border-radius: 28px;
+		box-shadow: 0 18px 45px rgba(30,20,18,.07);
+	}
+
+	.campaign-image {
+		overflow: hidden;
+		border-radius: 22px;
+		background: #f3ece4;
+	}
+
+	.campaign-image img {
+		display: block;
+		width: 100%;
+		aspect-ratio: 4 / 3;
+		object-fit: cover;
+	}
+
+	.campaign-content > p:not(.eyebrow) {
+		font-size: 18px;
+		line-height: 1.7;
+		color: #665d57;
+	}
+
+	.campaign-button {
+		margin-top: 10px;
+	}
+
+	.campaign-embed {
+		margin-top: 24px;
+		overflow: hidden;
+		border-radius: 18px;
+		background: #f3ece4;
+	}
+
+	.campaign-embed iframe {
+		display: block;
+		width: 100%;
+		min-height: 520px;
+		border: 0;
+	}
+
 	.donate-section {
 		width: min(1200px, calc(100% - 48px));
 		margin: 90px auto;
@@ -689,7 +790,8 @@ const featuredDogs = dogs
 			grid-template-columns: 1fr 1fr;
 		}
 
-		.mission-inner {
+		.mission-inner,
+		.campaign-inner {
 			grid-template-columns: 1fr;
 			gap: 35px;
 		}
@@ -742,13 +844,22 @@ const featuredDogs = dogs
 		.involved-section,
 		.faq-section,
 		.contact-section,
-		.mission-section {
+		.mission-section,
+		.campaign-section {
 			padding: 70px 24px;
 		}
 
 		.donate-section {
 			width: calc(100% - 34px);
 			padding: 34px 26px;
+		}
+
+		.campaign-inner {
+			padding: 26px;
+		}
+
+		.campaign-embed iframe {
+			min-height: 420px;
 		}
 
 		.scribble-section img {

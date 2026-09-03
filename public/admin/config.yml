@@ -79,3 +79,97 @@ collections:
         name: "description"
         widget: "text"
         hint: "Tell potential adopters about this dog's personality, story, and ideal home."
+
+  - name: "site_settings"
+    label: "Site Settings"
+
+    files:
+      - label: "Homepage"
+        name: "homepage"
+        file: "src/data/homepage.json"
+        format: "json"
+
+        fields:
+          - label: "Campaign Section 1"
+            name: "campaign1"
+            widget: "object"
+            collapsed: true
+
+            fields:
+              - label: "Show This Section"
+                name: "enabled"
+                widget: "boolean"
+                default: false
+
+              - label: "Title"
+                name: "title"
+                widget: "string"
+                required: false
+
+              - label: "Description"
+                name: "description"
+                widget: "text"
+                required: false
+
+              - label: "Image"
+                name: "image"
+                widget: "image"
+                required: false
+
+              - label: "Embed URL"
+                name: "embedUrl"
+                widget: "string"
+                required: false
+                hint: "Optional. Use this for a Givebutter or other embeddable campaign."
+
+              - label: "Button Text"
+                name: "buttonText"
+                widget: "string"
+                required: false
+
+              - label: "Button Link"
+                name: "buttonLink"
+                widget: "string"
+                required: false
+
+          - label: "Campaign Section 2"
+            name: "campaign2"
+            widget: "object"
+            collapsed: true
+
+            fields:
+              - label: "Show This Section"
+                name: "enabled"
+                widget: "boolean"
+                default: false
+
+              - label: "Title"
+                name: "title"
+                widget: "string"
+                required: false
+
+              - label: "Description"
+                name: "description"
+                widget: "text"
+                required: false
+
+              - label: "Image"
+                name: "image"
+                widget: "image"
+                required: false
+
+              - label: "Embed URL"
+                name: "embedUrl"
+                widget: "string"
+                required: false
+                hint: "Optional. Use this for a Givebutter or other embeddable campaign."
+
+              - label: "Button Text"
+                name: "buttonText"
+                widget: "string"
+                required: false
+
+              - label: "Button Link"
+                name: "buttonLink"
+                widget: "string"
+                required: false

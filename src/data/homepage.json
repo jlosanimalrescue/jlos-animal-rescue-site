@@ -1,0 +1,20 @@
+{
+  "campaign1": {
+    "enabled": false,
+    "title": "",
+    "description": "",
+    "image": "",
+    "embedUrl": "",
+    "buttonText": "",
+    "buttonLink": ""
+  },
+  "campaign2": {
+    "enabled": false,
+    "title": "",
+    "description": "",
+    "image": "",
+    "embedUrl": "",
+    "buttonText": "",
+    "buttonLink": ""
+  }
+}
