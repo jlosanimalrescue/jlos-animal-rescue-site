@@ -1,4 +1,72 @@
 {
+  "hero": {
+    "headlineLine1": "From Neglected",
+    "headlineLine2": "to Nourished.",
+    "headlineLine3": "From Alone",
+    "headlineLine4": "to Adored.",
+    "subheadlineLine1": "A safe haven. A second chance.",
+    "subheadlineLine2": "A forever home.",
+    "primaryButtonText": "Meet the Dogs",
+    "primaryButtonLink": "/adopt",
+    "donateButtonText": "♡ Donate",
+    "donateButtonLink": "https://givebutter.com/10k-for-10-years-wiozf4"
+  },
+  "featuredDogs": {
+    "eyebrow": "Find Your New Best Friend",
+    "title": "Dogs Looking for Love",
+    "description": "Every dog here is waiting for the right family. Maybe that's you."
+  },
+  "mission": {
+    "eyebrow": "Our Mission",
+    "title": "A life-saving dream made real.",
+    "paragraph1": "Founded by Jessica Lopez, a wife and mother of three, J-Lo Animal Rescue is a heartfelt life-long dream of Jessica’s that has blossomed into a life-saving reality in Albany, Ga.",
+    "paragraph2": "What started as a mission to save several emaciated dogs discovered in a local backyard has grown into a thriving non-profit sanctuary that now provides a safe haven for over 60 dogs at a time.",
+    "paragraph3": "We are dedicated to transforming lives through compassion and faith, ensuring that every animal in our care finds the love and dignity they deserve."
+  },
+  "involved": {
+    "eyebrow": "Get Involved",
+    "title": "There’s more than one way to help.",
+    "adoptTitle": "Adopt",
+    "adoptDescription": "Give a rescue dog the forever home they’ve been waiting for.",
+    "donateTitle": "Donate",
+    "donateDescription": "Help cover food, veterinary care, supplies, transportation, and daily needs.",
+    "volunteerTitle": "Volunteer",
+    "volunteerDescription": "Give your time and skills to help support the sanctuary and the dogs."
+  },
+  "donation": {
+    "eyebrow": "Join Our Rescue Pack",
+    "title": "Help us save the next one.",
+    "description": "Your support gives rescued dogs food, medical care, shelter, transportation, and the chance to heal.",
+    "buttonText": "Donate Today",
+    "buttonLink": "https://givebutter.com/10k-for-10-years-wiozf4"
+  },
+  "faqs": {
+    "eyebrow": "FAQs",
+    "title": "Before You Adopt",
+    "question1": "How do I adopt a dog?",
+    "answer1": "Browse available dogs, send an inquiry, complete the application, and work with us through the matchmaking process.",
+    "question2": "Can I meet a dog first?",
+    "answer2": "Yes. Meetings are coordinated directly with the rescue as part of the adoption process.",
+    "question3": "Why is a home walkthrough required?",
+    "answer3": "It helps us make sure the environment is appropriate and safe for the dog."
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Tell us how we can help.",
+    "namePlaceholder": "Your name",
+    "emailPlaceholder": "Email address",
+    "dogPlaceholder": "Dog you're interested in",
+    "messagePlaceholder": "Message",
+    "buttonText": "Send Message"
+  },
+  "footer": {
+    "location": "Albany, Georgia",
+    "tagline": "From Neglected to Nourished. From Alone to Adored.",
+    "dogsLinkText": "Meet the Dogs",
+    "missionLinkText": "Our Mission",
+    "involvedLinkText": "Get Involved",
+    "contactLinkText": "Contact"
+  },
   "campaign1": {
     "enabled": false,
     "title": "",

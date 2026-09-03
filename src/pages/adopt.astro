@@ -1,4 +1,6 @@
 ---
+import adopt from '../data/adopt.json';
+
 const dogFiles = import.meta.glob('../data/dogs/*.json', { eager: true });
 
 const dogs = Object.values(dogFiles).map((file: any) => file.default);
@@ -45,18 +47,15 @@ const displayedDogs = dogs.filter(
 
 		<main>
 			<section class="page-hero">
-				<p class="eyebrow">Find Your New Best Friend</p>
-				<h1>Meet the Dogs</h1>
-				<p>
-					Every dog has a story. Every dog deserves a home.
-					Meet the dogs currently available for adoption.
-				</p>
+				<p class="eyebrow">{adopt.heroEyebrow}</p>
+				<h1>{adopt.heroTitle}</h1>
+				<p>{adopt.heroDescription}</p>
 			</section>
 
 			<section class="dogs-section">
 				<div class="dog-count">
 					<strong>{availableDogs.length}</strong>
-					<span>dogs currently looking for homes</span>
+					<span>{adopt.dogCountText}</span>
 				</div>
 
 				<div class="dog-grid">
@@ -73,13 +72,13 @@ const displayedDogs = dogs.filter(
 									<img src={dog.image} alt={dog.name} />
 								) : (
 									<div class="placeholder">
-										<span>Photo Coming Soon</span>
+										<span>{adopt.photoComingSoon}</span>
 									</div>
 								)}
 
 								{dog.status === 'Adopted' && (
 									<div class="adopted-overlay">
-										<span>ADOPTED! ❤️</span>
+										<span>{adopt.adoptedOverlay}</span>
 									</div>
 								)}
 							</div>
@@ -109,11 +108,11 @@ const displayedDogs = dogs.filter(
 
 								{dog.status === 'Adopted' ? (
 									<span class="adopted-message">
-										Found Their Forever Home ❤️
+										{adopt.adoptedMessage}
 									</span>
 								) : (
 									<a class="meet-button" href={`/dogs/${dog.slug}`}>
-										Meet {dog.name} →
+										{adopt.meetDogText} {dog.name} →
 									</a>
 								)}
 							</div>
@@ -127,11 +126,11 @@ const displayedDogs = dogs.filter(
 			<img src="/images/J-lo logo.png" alt="J-Lo's Animal Rescue & Sanctuary" />
 
 			<div>
-				<p>Albany, Georgia</p>
-				<p>From Neglected to Nourished. From Alone to Adored.</p>
+				<p>{adopt.footerLocation}</p>
+				<p>{adopt.footerTagline}</p>
 			</div>
 
-			<a href="/">Back Home</a>
+			<a href="/">{adopt.backHomeText}</a>
 		</footer>
 	</body>
 </html>

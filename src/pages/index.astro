@@ -31,13 +31,13 @@ const campaignSections = [homepage.campaign1, homepage.campaign2].filter(
 			<nav>
 				<a href="/">Home</a>
 <a href="/adopt">Adopt</a>
-				<a href="#mission">Our Mission</a>
-				<a href="#involved">Get Involved</a>
+				<a href="#mission">{homepage.footer.missionLinkText}</a>
+				<a href="#involved">{homepage.footer.involvedLinkText}</a>
 				<a href="#faq">FAQs</a>
-				<a href="#contact">Contact</a>
+				<a href="#contact">{homepage.footer.contactLinkText}</a>
 			</nav>
 
-<a class="donate" href="https://givebutter.com/10k-for-10-years-wiozf4" target="_blank">♡ Donate</a>		</header>
+<a class="donate" href={homepage.hero.donateButtonLink} target="_blank" rel="noopener noreferrer">{homepage.hero.donateButtonText}</a>		</header>
 
 		<main>
 			<section class="hero">
@@ -45,28 +45,29 @@ const campaignSections = [homepage.campaign1, homepage.campaign2].filter(
 
 				<div class="hero-content">
 					<h1>
-						From Neglected<br />
-						to Nourished.<br />
-						From Alone<br />
-						to Adored. <span>♥</span>
+						{homepage.hero.headlineLine1}<br />
+						{homepage.hero.headlineLine2}<br />
+						{homepage.hero.headlineLine3}<br />
+						{homepage.hero.headlineLine4} <span>♥</span>
 					</h1>
 
 					<p>
-						A safe haven. A second chance.<br />
-						A forever home.
+						{homepage.hero.subheadlineLine1}<br />
+						{homepage.hero.subheadlineLine2}
 					</p>
 
 					<div class="hero-buttons">
-						<a class="primary-button" href="/adopt">Meet the Dogs</a>
-<a class="donate" href="https://givebutter.com/10k-for-10-years-wiozf4" target="_blank">♡ Donate</a>					</div>
+						<a class="primary-button" href={homepage.hero.primaryButtonLink}>{homepage.hero.primaryButtonText}</a>
+						<a class="donate" href={homepage.hero.donateButtonLink} target="_blank" rel="noopener noreferrer">{homepage.hero.donateButtonText}</a>
+					</div>
 				</div>
 			</section>
 
 			<section class="dogs-section" id="dogs">
 				<div class="section-heading">
-					<p class="eyebrow">Find Your New Best Friend</p>
-					<h2>Dogs Looking for Love</h2>
-					<p>Every dog here is waiting for the right family. Maybe that's you.</p>
+					<p class="eyebrow">{homepage.featuredDogs.eyebrow}</p>
+					<h2>{homepage.featuredDogs.title}</h2>
+					<p>{homepage.featuredDogs.description}</p>
 				</div>
 
 				<div class="dog-grid">
@@ -107,26 +108,13 @@ const campaignSections = [homepage.campaign1, homepage.campaign2].filter(
 					</div>
 
 					<div class="mission-content">
-						<p class="eyebrow">Our Mission</p>
-						<h2>A life-saving dream made real.</h2>
+						<p class="eyebrow">{homepage.mission.eyebrow}</p>
+						<h2>{homepage.mission.title}</h2>
 
 						<div class="mission-copy">
-							<p>
-								Founded by Jessica Lopez, a wife and mother of three, J-Lo Animal Rescue
-								is a heartfelt life-long dream of Jessica’s that has blossomed into a
-								life-saving reality in Albany, Ga.
-							</p>
-
-							<p>
-								What started as a mission to save several emaciated dogs discovered in
-								a local backyard has grown into a thriving non-profit sanctuary that now
-								provides a safe haven for over 60 dogs at a time.
-							</p>
-
-							<p>
-								We are dedicated to transforming lives through compassion and faith,
-								ensuring that every animal in our care finds the love and dignity they deserve.
-							</p>
+							<p>{homepage.mission.paragraph1}</p>
+							<p>{homepage.mission.paragraph2}</p>
+							<p>{homepage.mission.paragraph3}</p>
 						</div>
 					</div>
 				</div>
@@ -134,24 +122,24 @@ const campaignSections = [homepage.campaign1, homepage.campaign2].filter(
 
 			<section class="involved-section" id="involved">
 				<div class="section-heading">
-					<p class="eyebrow">Get Involved</p>
-					<h2>There’s more than one way to help.</h2>
+					<p class="eyebrow">{homepage.involved.eyebrow}</p>
+					<h2>{homepage.involved.title}</h2>
 				</div>
 
 				<div class="involved-grid">
 					<div>
-						<h3>Adopt</h3>
-						<p>Give a rescue dog the forever home they’ve been waiting for.</p>
+						<h3>{homepage.involved.adoptTitle}</h3>
+						<p>{homepage.involved.adoptDescription}</p>
 					</div>
 
 					<div>
-						<h3>Donate</h3>
-						<p>Help cover food, veterinary care, supplies, transportation, and daily needs.</p>
+						<h3>{homepage.involved.donateTitle}</h3>
+						<p>{homepage.involved.donateDescription}</p>
 					</div>
 
 					<div>
-						<h3>Volunteer</h3>
-						<p>Give your time and skills to help support the sanctuary and the dogs.</p>
+						<h3>{homepage.involved.volunteerTitle}</h3>
+						<p>{homepage.involved.volunteerDescription}</p>
 					</div>
 				</div>
 			</section>
@@ -197,67 +185,57 @@ const campaignSections = [homepage.campaign1, homepage.campaign2].filter(
 
 			<section class="donate-section" id="donate">
 				<div>
-					<p class="eyebrow light-eyebrow">Join Our Rescue Pack</p>
-					<h2>Help us save the next one.</h2>
-					<p>
-						Your support gives rescued dogs food, medical care, shelter, transportation,
-						and the chance to heal.
-					</p>
+					<p class="eyebrow light-eyebrow">{homepage.donation.eyebrow}</p>
+					<h2>{homepage.donation.title}</h2>
+					<p>{homepage.donation.description}</p>
 				</div>
 
 				<a
-					href="https://givebutter.com/10k-for-10-years-wiozf4"
+					href={homepage.donation.buttonLink}
 					class="white-button"
 					target="_blank"
 					rel="noopener noreferrer"
 				>
-					Donate Today
+					{homepage.donation.buttonText}
 				</a>
 			</section>
 
 			<section class="faq-section" id="faq">
 				<div class="section-heading">
-					<p class="eyebrow">FAQs</p>
-					<h2>Before You Adopt</h2>
+					<p class="eyebrow">{homepage.faqs.eyebrow}</p>
+					<h2>{homepage.faqs.title}</h2>
 				</div>
 
 				<div class="faq-list">
 					<details>
-						<summary>How do I adopt a dog?</summary>
-						<p>
-							Browse available dogs, send an inquiry, complete the application,
-							and work with us through the matchmaking process.
-						</p>
+						<summary>{homepage.faqs.question1}</summary>
+						<p>{homepage.faqs.answer1}</p>
 					</details>
 
 					<details>
-						<summary>Can I meet a dog first?</summary>
-						<p>
-							Yes. Meetings are coordinated directly with the rescue as part of the adoption process.
-						</p>
+						<summary>{homepage.faqs.question2}</summary>
+						<p>{homepage.faqs.answer2}</p>
 					</details>
 
 					<details>
-						<summary>Why is a home walkthrough required?</summary>
-						<p>
-							It helps us make sure the environment is appropriate and safe for the dog.
-						</p>
+						<summary>{homepage.faqs.question3}</summary>
+						<p>{homepage.faqs.answer3}</p>
 					</details>
 				</div>
 			</section>
 
 			<section class="contact-section" id="contact">
 				<div class="section-heading">
-					<p class="eyebrow">Contact</p>
-					<h2>Tell us how we can help.</h2>
+					<p class="eyebrow">{homepage.contact.eyebrow}</p>
+					<h2>{homepage.contact.title}</h2>
 				</div>
 
 				<form>
-					<input type="text" placeholder="Your name" />
-					<input type="email" placeholder="Email address" />
-					<input type="text" placeholder="Dog you're interested in" />
-					<textarea placeholder="Message"></textarea>
-					<button type="submit">Send Message</button>
+					<input type="text" placeholder={homepage.contact.namePlaceholder} />
+					<input type="email" placeholder={homepage.contact.emailPlaceholder} />
+					<input type="text" placeholder={homepage.contact.dogPlaceholder} />
+					<textarea placeholder={homepage.contact.messagePlaceholder}></textarea>
+					<button type="submit">{homepage.contact.buttonText}</button>
 				</form>
 			</section>
 
@@ -272,12 +250,12 @@ const campaignSections = [homepage.campaign1, homepage.campaign2].filter(
 			</div>
 
 			<div>
-				<p>Albany, Georgia</p>
-				<p>From Neglected to Nourished. From Alone to Adored.</p>
+				<p>{homepage.footer.location}</p>
+				<p>{homepage.footer.tagline}</p>
 			</div>
 
 			<div>
-				<a href="/adopt">Meet the Dogs</a>
+				<a href="/adopt">{homepage.footer.dogsLinkText}</a>
 				<a href="#mission">Our Mission</a>
 				<a href="#involved">Get Involved</a>
 				<a href="#contact">Contact</a>

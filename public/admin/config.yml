@@ -90,6 +90,262 @@ collections:
         format: "json"
 
         fields:
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            collapsed: true
+
+            fields:
+              - label: "Headline Line 1"
+                name: "headlineLine1"
+                widget: "string"
+
+              - label: "Headline Line 2"
+                name: "headlineLine2"
+                widget: "string"
+
+              - label: "Headline Line 3"
+                name: "headlineLine3"
+                widget: "string"
+
+              - label: "Headline Line 4"
+                name: "headlineLine4"
+                widget: "string"
+
+              - label: "Subheadline Line 1"
+                name: "subheadlineLine1"
+                widget: "string"
+
+              - label: "Subheadline Line 2"
+                name: "subheadlineLine2"
+                widget: "string"
+
+              - label: "Primary Button Text"
+                name: "primaryButtonText"
+                widget: "string"
+
+              - label: "Primary Button Link"
+                name: "primaryButtonLink"
+                widget: "string"
+
+              - label: "Donate Button Text"
+                name: "donateButtonText"
+                widget: "string"
+
+              - label: "Donate Button Link"
+                name: "donateButtonLink"
+                widget: "string"
+
+          - label: "Featured Dogs Section"
+            name: "featuredDogs"
+            widget: "object"
+            collapsed: true
+
+            fields:
+              - label: "Eyebrow"
+                name: "eyebrow"
+                widget: "string"
+
+              - label: "Title"
+                name: "title"
+                widget: "string"
+
+              - label: "Description"
+                name: "description"
+                widget: "text"
+
+          - label: "Mission Section"
+            name: "mission"
+            widget: "object"
+            collapsed: true
+
+            fields:
+              - label: "Eyebrow"
+                name: "eyebrow"
+                widget: "string"
+
+              - label: "Title"
+                name: "title"
+                widget: "string"
+
+              - label: "Paragraph 1"
+                name: "paragraph1"
+                widget: "text"
+
+              - label: "Paragraph 2"
+                name: "paragraph2"
+                widget: "text"
+
+              - label: "Paragraph 3"
+                name: "paragraph3"
+                widget: "text"
+
+          - label: "Get Involved Section"
+            name: "involved"
+            widget: "object"
+            collapsed: true
+
+            fields:
+              - label: "Eyebrow"
+                name: "eyebrow"
+                widget: "string"
+
+              - label: "Title"
+                name: "title"
+                widget: "string"
+
+              - label: "Adopt Card Title"
+                name: "adoptTitle"
+                widget: "string"
+
+              - label: "Adopt Card Description"
+                name: "adoptDescription"
+                widget: "text"
+
+              - label: "Donate Card Title"
+                name: "donateTitle"
+                widget: "string"
+
+              - label: "Donate Card Description"
+                name: "donateDescription"
+                widget: "text"
+
+              - label: "Volunteer Card Title"
+                name: "volunteerTitle"
+                widget: "string"
+
+              - label: "Volunteer Card Description"
+                name: "volunteerDescription"
+                widget: "text"
+
+          - label: "Donation Section"
+            name: "donation"
+            widget: "object"
+            collapsed: true
+
+            fields:
+              - label: "Eyebrow"
+                name: "eyebrow"
+                widget: "string"
+
+              - label: "Title"
+                name: "title"
+                widget: "string"
+
+              - label: "Description"
+                name: "description"
+                widget: "text"
+
+              - label: "Button Text"
+                name: "buttonText"
+                widget: "string"
+
+              - label: "Button Link"
+                name: "buttonLink"
+                widget: "string"
+
+          - label: "FAQs"
+            name: "faqs"
+            widget: "object"
+            collapsed: true
+
+            fields:
+              - label: "Eyebrow"
+                name: "eyebrow"
+                widget: "string"
+
+              - label: "Title"
+                name: "title"
+                widget: "string"
+
+              - label: "Question 1"
+                name: "question1"
+                widget: "string"
+
+              - label: "Answer 1"
+                name: "answer1"
+                widget: "text"
+
+              - label: "Question 2"
+                name: "question2"
+                widget: "string"
+
+              - label: "Answer 2"
+                name: "answer2"
+                widget: "text"
+
+              - label: "Question 3"
+                name: "question3"
+                widget: "string"
+
+              - label: "Answer 3"
+                name: "answer3"
+                widget: "text"
+
+          - label: "Contact Section"
+            name: "contact"
+            widget: "object"
+            collapsed: true
+
+            fields:
+              - label: "Eyebrow"
+                name: "eyebrow"
+                widget: "string"
+
+              - label: "Title"
+                name: "title"
+                widget: "string"
+
+              - label: "Name Placeholder"
+                name: "namePlaceholder"
+                widget: "string"
+
+              - label: "Email Placeholder"
+                name: "emailPlaceholder"
+                widget: "string"
+
+              - label: "Dog Placeholder"
+                name: "dogPlaceholder"
+                widget: "string"
+
+              - label: "Message Placeholder"
+                name: "messagePlaceholder"
+                widget: "string"
+
+              - label: "Button Text"
+                name: "buttonText"
+                widget: "string"
+
+          - label: "Footer"
+            name: "footer"
+            widget: "object"
+            collapsed: true
+
+            fields:
+              - label: "Location"
+                name: "location"
+                widget: "string"
+
+              - label: "Tagline"
+                name: "tagline"
+                widget: "string"
+
+              - label: "Meet the Dogs Link Text"
+                name: "dogsLinkText"
+                widget: "string"
+
+              - label: "Mission Link Text"
+                name: "missionLinkText"
+                widget: "string"
+
+              - label: "Get Involved Link Text"
+                name: "involvedLinkText"
+                widget: "string"
+
+              - label: "Contact Link Text"
+                name: "contactLinkText"
+                widget: "string"
+
           - label: "Campaign Section 1"
             name: "campaign1"
             widget: "object"
@@ -173,3 +429,53 @@ collections:
                 name: "buttonLink"
                 widget: "string"
                 required: false
+
+      - label: "Adopt Page"
+        name: "adopt"
+        file: "src/data/adopt.json"
+        format: "json"
+
+        fields:
+          - label: "Hero Eyebrow"
+            name: "heroEyebrow"
+            widget: "string"
+
+          - label: "Hero Title"
+            name: "heroTitle"
+            widget: "string"
+
+          - label: "Hero Description"
+            name: "heroDescription"
+            widget: "text"
+
+          - label: "Dog Count Text"
+            name: "dogCountText"
+            widget: "string"
+
+          - label: "Photo Coming Soon Text"
+            name: "photoComingSoon"
+            widget: "string"
+
+          - label: "Adopted Overlay Text"
+            name: "adoptedOverlay"
+            widget: "string"
+
+          - label: "Adopted Message"
+            name: "adoptedMessage"
+            widget: "string"
+
+          - label: "Meet Dog Button Text"
+            name: "meetDogText"
+            widget: "string"
+
+          - label: "Footer Location"
+            name: "footerLocation"
+            widget: "string"
+
+          - label: "Footer Tagline"
+            name: "footerTagline"
+            widget: "string"
+
+          - label: "Back Home Text"
+            name: "backHomeText"
+            widget: "string"
